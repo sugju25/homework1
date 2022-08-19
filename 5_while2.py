@@ -1,27 +1,16 @@
-"""
-
-Домашнее задание №1
-
-Цикл while: ask_user со словарём
-
-* Создайте словарь типа "вопрос": "ответ", например:
-  {"Как дела": "Хорошо!", "Что делаешь?": "Программирую"} и так далее
-* Напишите функцию ask_user() которая с помощью функции input()
-  просит пользователя ввести вопрос, а затем, если вопрос есть
-  в словаре, программа давала ему соотвествующий ответ. Например:
-
-    Пользователь: Что делаешь?
-    Программа: Программирую
-    
-"""
-
-questions_and_answers = {}
+questions_and_answers = {"Как дела?": "Хорошо!", "Что делаешь?": "Программирую", "Я мыслю?": "Я существую"}
 
 def ask_user(answers_dict):
-    """
-    Замените pass на ваш код
-    """
-    pass
+  while True:
+    answers_dict = input("Введите вопрос")
+    print(answers_dict)
+    if answers_dict == " Как дела?":
+      print(questions_and_answers.get("Как дела?"))
+    elif answers_dict == " Что делаешь?":
+      print(questions_and_answers.get("Что делаешь?"))
+    elif answers_dict == " Я мыслю?":
+      print(questions_and_answers.get("Я мыслю?"))
+    break
     
-if __name__ == "__main__":
-    ask_user(questions_and_answers)
+ask_user("Введите вопрос")
+

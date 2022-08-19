@@ -1,21 +1,9 @@
-"""
+def hello_user(ask_user):
+  while True:
+    ask_user = input ("Как дела?")
+    if ask_user == "Хорошо":
+      break
+    else:
+      print("что значит {}?" .format(ask_user))
 
-Домашнее задание №1
-
-Цикл while: hello_user
-
-* Напишите функцию hello_user(), которая с помощью функции input() спрашивает 
-  пользователя “Как дела?”, пока он не ответит “Хорошо”
-   
-"""
-
-
-def hello_user():
-    """
-    Замените pass на ваш код
-    """
-    pass
-
-    
-if __name__ == "__main__":
-    hello_user()
+hello_user("Как дела?")

@@ -13,7 +13,7 @@
 
 """
 import logging
-
+import ephem
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
@@ -21,33 +21,52 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     filename='bot.log')
 
 
-PROXY = {
-    'proxy_url': 'socks5://t1.learn.python.ru:1080',
-    'urllib3_proxy_kwargs': {
-        'username': 'learn',
-        'password': 'python'
-    }
-}
-
 
 def greet_user(update, context):
     text = 'Вызван /start'
     print(text)
-    update.message.reply_text(text)
+    update.message.reply_text("Привет! Чтобы узнать больше о планетах, жми /planet")
 
 
 def talk_to_me(update, context):
     user_text = update.message.text
     print(user_text)
-    update.message.reply_text(text)
+    update.message.reply_text(get_planet)
+
+planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+
+def get_planet(update, context):
+    pt = "Вызван /planet"
+    print(pt)
+    message = update.message.reply.split()[planets]
+    print(message)
+    if message == "Mercury":
+      update.message.reply.split(ephem.constellation.Mercury("2022/08/14"))
+    elif message == "Venus":
+      update.message.reply.split(ephem.constellation.Venus("2022/08/14"))
+    elif message == "Earth":
+      update.message.reply.split(ephem.constellation.Earth("2022/08/14"))
+    elif message == "Mars":
+      update.message.reply.split(ephem.constellation.Mars("2022/08/14"))
+    elif message == "Jupiter":
+      update.message.reply.split(ephem.constellation.Jupiter("2022/08/14"))
+    elif message == "Saturn":
+      update.message.reply.split(ephem.constellation.Saturn("2022/08/14"))
+    elif message =="Uranus":
+      update.message.reply.split(ephem.constellation.Uranus("2022/08/14"))
+    elif message =="Neptune":
+      update.message.reply.split(ephem.constellation.Neptune("2022/08/14"))
+    else:
+      print("Я знаю только планеты солнечной системы")
 
 
 def main():
-    mybot = Updater("КЛЮЧ, КОТОРЫЙ НАМ ВЫДАЛ BotFather", request_kwargs=PROXY, use_context=True)
+    mybot = Updater("5799760258:AAEXkQC-Th6qvY_rgAEyF2bSUBduKS99w5M", use_context=True)
 
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
+    dp.add_handler(CommandHandler("planet", get_planet))
 
     mybot.start_polling()
     mybot.idle()
